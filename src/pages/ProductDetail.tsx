@@ -56,7 +56,7 @@ const ProductDetail = () => {
             {/* Images */}
             <div>
               <div className="rounded-2xl overflow-hidden bg-muted mb-4">
-                <img src={product.images[selectedImage]} alt={product.name} className="w-full h-[500px] object-cover" />
+                <img src={product.images[selectedImage]} alt={product.name} className="w-full h-[300px] sm:h-[350px] lg:h-[400px] object-cover" />
               </div>
               <div className="flex gap-3">
                 {product.images.map((img, i) => (
@@ -131,7 +131,7 @@ const ProductDetail = () => {
                 {related.map(p => (
                   <Link key={p.id} to={`/product/${p.slug}`} className="group">
                     <div className="rounded-2xl overflow-hidden bg-muted mb-4">
-                      <img src={p.image} alt={p.name} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300" />
+                      <img src={p.image} alt={p.name} className="w-full h-40 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
                     </div>
                     <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">{p.name}</h3>
                     <p className="text-primary font-bold mt-1">{p.priceFormatted}</p>
