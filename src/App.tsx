@@ -21,6 +21,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    {/* Status bar handled via CSS gradient in index.css */}
     <TooltipProvider>
       <CartProvider>
         <Toaster />

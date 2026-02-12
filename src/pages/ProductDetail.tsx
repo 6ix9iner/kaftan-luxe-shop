@@ -81,9 +81,8 @@ const ProductDetail = () => {
                 <div className="flex flex-wrap gap-3">
                   {product.sizes.map(size => (
                     <button key={size} onClick={() => setSelectedSize(size)}
-                      className={`px-5 py-2.5 rounded-lg border text-sm font-medium transition-all ${
-                        selectedSize === size ? "bg-primary text-primary-foreground border-primary" : "border-border text-foreground hover:border-primary"
-                      }`}>
+                      className={`px-5 py-2.5 rounded-lg border text-sm font-medium transition-all ${selectedSize === size ? "bg-primary text-primary-foreground border-primary" : "border-border text-foreground hover:border-primary"
+                        }`}>
                       {size}
                     </button>
                   ))}
@@ -123,17 +122,20 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          {/* Related */}
           {related.length > 0 && (
-            <div className="mt-20">
+            <div className="mt-20 border-t border-border pt-12">
               <h2 className="text-2xl font-bold text-foreground mb-8">You May Also Like</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {related.map(p => (
-                  <Link key={p.id} to={`/product/${p.slug}`} className="group">
-                    <div className="rounded-2xl overflow-hidden bg-muted mb-4">
-                      <img src={p.image} alt={p.name} className="w-full h-40 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <Link key={p.id} to={`/product/${p.slug}`} className="group block">
+                    <div className="rounded-2xl overflow-hidden bg-muted mb-4 aspect-square">
+                      <img
+                        src={p.image}
+                        alt={p.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
                     </div>
-                    <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">{p.name}</h3>
+                    <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors">{p.name}</h3>
                     <p className="text-primary font-bold mt-1">{p.priceFormatted}</p>
                   </Link>
                 ))}

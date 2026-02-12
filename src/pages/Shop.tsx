@@ -13,17 +13,17 @@ const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedSort, setSelectedSort] = useState("latest");
 
-  const filteredProducts = products.filter(product => 
+  const filteredProducts = products.filter(product =>
     selectedCategory === "all" || product.category === selectedCategory
   );
 
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       {/* Hero Section with kaftan background */}
       <section className="pt-0 pb-0 relative overflow-hidden">
-        <div 
+        <div
           className="w-full min-h-[340px] flex items-end bg-cover bg-center"
           style={{ backgroundImage: "url('/hero-bg-kaftan.jpg')" }}
         >
@@ -34,7 +34,7 @@ const Shop = () => {
                 Shop Collection
               </h1>
               <p className="text-base text-white/80 max-w-2xl mx-auto">
-                Discover our complete range of premium kaftans and shirts, 
+                Discover our complete range of premium kaftans and shirts,
                 crafted for the discerning modern gentleman.
               </p>
             </div>
@@ -59,7 +59,7 @@ const Shop = () => {
                 </SelectContent>
               </Select>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               <span className="text-sm text-muted-foreground">Sort by:</span>
               <Select value={selectedSort} onValueChange={setSelectedSort}>
@@ -112,9 +112,7 @@ const Shop = () => {
                       {product.name}
                     </h3>
                   </Link>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {product.description}
-                  </p>
+
                   <div className="flex items-center justify-between">
                     <span className="text-xl font-bold text-primary">
                       {product.priceFormatted}

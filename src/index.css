@@ -99,7 +99,37 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground;
+  html {
+    background-color: black;
   }
+
+  body {
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    overscroll-behavior-y: none;
+    /* Prevent white bounce on some browsers */
+  }
+
+  #root {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* Hide native play button on iOS/Android */
+video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
+video::-webkit-media-controls-play-button {
+  display: none !important;
+}
+
+video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
 }
