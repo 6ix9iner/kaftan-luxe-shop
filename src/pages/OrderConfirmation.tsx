@@ -57,22 +57,14 @@ const OrderConfirmation = () => {
 
       console.log("Receipt uploaded successfully:", uploadData);
 
-      // Use signed URL (valid 7 days) to guarantee accessibility
-      const { data: signedData, error: signedError } = await supabase.storage
+      // Build public URL directly — bucket is public
+      const { data: urlData } = supabase.storage
         .from("receipts")
-        .createSignedUrl(filePath, 60 * 60 * 24 * 7); // 7 days
-
-      if (signedError || !signedData?.signedUrl) {
-        // Fallback to public URL
-        const { data: urlData } = supabase.storage
-          .from("receipts")
-          .getPublicUrl(filePath);
-        console.log("Fallback to public URL:", urlData.publicUrl);
-        setReceiptUrl(urlData.publicUrl);
-      } else {
-        console.log("Receipt signed URL:", signedData.signedUrl);
-        setReceiptUrl(signedData.signedUrl);
-      }
+        .getPublicUrl(filePath);
+      
+      const url = urlData.publicUrl;
+      console.log("Receipt URL set to:", url);
+      setReceiptUrl(url);
       toast({ title: "Receipt uploaded successfully!" });
     } catch (err: any) {
       console.error("Receipt upload failed:", err);
@@ -99,6 +91,7 @@ const OrderConfirmation = () => {
   };
 
   const buildWhatsAppLink = () => {
+    console.log("Building WhatsApp link. receiptUrl:", receiptUrl, "invoiceUrl:", state.invoiceUrl);
     const hasReceipt = !!receiptUrl;
     const hasInvoice = !!state.invoiceUrl;
 
