@@ -57,12 +57,22 @@ const OrderConfirmation = () => {
 
       console.log("Receipt uploaded successfully:", uploadData);
 
-      const { data: urlData } = supabase.storage
+      // Use signed URL (valid 7 days) to guarantee accessibility
+      const { data: signedData, error: signedError } = await supabase.storage
         .from("receipts")
-        .getPublicUrl(filePath);
+        .createSignedUrl(filePath, 60 * 60 * 24 * 7); // 7 days
 
-      console.log("Receipt public URL:", urlData.publicUrl);
-      setReceiptUrl(urlData.publicUrl);
+      if (signedError || !signedData?.signedUrl) {
+        // Fallback to public URL
+        const { data: urlData } = supabase.storage
+          .from("receipts")
+          .getPublicUrl(filePath);
+        console.log("Fallback to public URL:", urlData.publicUrl);
+        setReceiptUrl(urlData.publicUrl);
+      } else {
+        console.log("Receipt signed URL:", signedData.signedUrl);
+        setReceiptUrl(signedData.signedUrl);
+      }
       toast({ title: "Receipt uploaded successfully!" });
     } catch (err: any) {
       console.error("Receipt upload failed:", err);
