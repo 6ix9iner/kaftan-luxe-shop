@@ -157,7 +157,7 @@ const Hero = () => {
           </div>
 
           {/* Subtitle - updated text */}
-          <p className="hero-subtitle text-base sm:text-lg max-w-2xl mx-auto text-foreground leading-relaxed font-light">
+          <p className="hero-subtitle text-lg sm:text-xl max-w-2xl mx-auto text-foreground leading-relaxed font-semibold">
             Élégance meets style. Premium outfits crafted for men who value refined style and confidence.
           </p>
 
