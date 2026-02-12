@@ -15,7 +15,7 @@ const Navigation = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const threshold = isHome ? window.innerHeight - 100 : 10;
+      const threshold = isHome ? window.innerHeight - 100 : 0;
       setIsScrolled(window.scrollY > threshold);
     };
 
