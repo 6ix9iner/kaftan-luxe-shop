@@ -1,42 +1,21 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
+
+const SUPABASE_URL = "https://hdevkqhvplhenqbzpalq.supabase.co";
 
 const InvoiceView = () => {
   const [searchParams] = useSearchParams();
   const invoiceId = searchParams.get("id");
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const invoiceUrl = invoiceId
+    ? `${SUPABASE_URL}/storage/v1/object/public/receipts/invoices/${invoiceId}.html`
+    : null;
 
   useEffect(() => {
     if (!invoiceId) {
       setError("No invoice ID provided");
-      setLoading(false);
-      return;
     }
-
-    const fetchInvoice = async () => {
-      try {
-        const { data } = supabase.storage
-          .from("receipts")
-          .getPublicUrl(`invoices/${invoiceId}.html`);
-
-        const res = await fetch(data.publicUrl);
-        if (!res.ok) throw new Error("Invoice not found");
-
-        const html = await res.text();
-
-        // Replace the entire document with the invoice HTML
-        document.open();
-        document.write(html);
-        document.close();
-      } catch {
-        setError("Invoice not found or could not be loaded.");
-        setLoading(false);
-      }
-    };
-
-    fetchInvoice();
   }, [invoiceId]);
 
   if (error) {
@@ -50,15 +29,13 @@ const InvoiceView = () => {
     );
   }
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <p className="text-muted-foreground">Loading invoice...</p>
-      </div>
-    );
-  }
-
-  return null;
+  return (
+    <iframe
+      src={invoiceUrl!}
+      title={`Invoice ${invoiceId}`}
+      className="w-full h-screen border-0"
+    />
+  );
 };
 
 export default InvoiceView;
