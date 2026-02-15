@@ -104,7 +104,7 @@ Deno.serve(async (req) => {
     let invoiceUrl: string | null = null;
     if (!uploadError) {
       // Use the app's /invoice route which fetches and renders the HTML properly
-      const origin = req.headers.get("origin") || req.headers.get("referer")?.replace(/\/$/, "") || "";
+      const origin = req.headers.get("origin") || req.headers.get("referer")?.replace(/\/$/, "") || "https://kaftan-luxe-shop.lovable.app";
       invoiceUrl = `${origin}/invoice?id=${orderId}`;
     } else {
       console.error("Invoice upload error:", uploadError);
