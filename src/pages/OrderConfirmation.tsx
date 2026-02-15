@@ -74,20 +74,9 @@ const OrderConfirmation = () => {
     }
   };
 
-  const openInvoice = async () => {
+  const openInvoice = () => {
     if (!state.invoiceUrl) return;
-    try {
-      const res = await fetch(state.invoiceUrl);
-      const html = await res.text();
-      const win = window.open("", "_blank");
-      if (win) {
-        win.document.write(html);
-        win.document.close();
-      }
-    } catch {
-      // Fallback: open URL directly
-      window.open(state.invoiceUrl, "_blank", "noopener,noreferrer");
-    }
+    window.open(state.invoiceUrl, "_blank", "noopener,noreferrer");
   };
 
   const buildWhatsAppLink = () => {
