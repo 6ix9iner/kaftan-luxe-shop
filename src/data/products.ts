@@ -1,3 +1,10 @@
+import classicWhiteKaftan from "@/assets/products/classic-white-kaftan.jpg";
+import navyPremiumShirt from "@/assets/products/navy-premium-shirt.jpg";
+import embroideredGoldKaftan from "@/assets/products/embroidered-gold-kaftan.jpg";
+import casualLinenShirt from "@/assets/products/casual-linen-shirt.jpg";
+import royalBlueKaftan from "@/assets/products/royal-blue-kaftan.jpg";
+import oxfordBusinessShirt from "@/assets/products/oxford-business-shirt.jpg";
+
 export interface Product {
   id: number;
   name: string;
@@ -19,8 +26,8 @@ export const products: Product[] = [
     price: 25000,
     priceFormatted: "₦25,000",
     category: "kaftans",
-    image: "/placeholder.svg",
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    image: classicWhiteKaftan,
+    images: [classicWhiteKaftan, classicWhiteKaftan, classicWhiteKaftan],
     description: "Pure cotton traditional kaftan with modern fit. This timeless piece blends heritage craftsmanship with contemporary tailoring, offering supreme comfort and elegance for any occasion.",
     details: [
       "100% premium cotton fabric",
@@ -38,8 +45,8 @@ export const products: Product[] = [
     price: 18000,
     priceFormatted: "₦18,000",
     category: "shirts",
-    image: "/placeholder.svg",
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    image: navyPremiumShirt,
+    images: [navyPremiumShirt, navyPremiumShirt, navyPremiumShirt],
     description: "Sophisticated shirt for business and casual wear. Crafted from premium fabric with attention to every stitch, this shirt transitions seamlessly from boardroom to evening events.",
     details: [
       "Premium blended fabric",
@@ -57,8 +64,8 @@ export const products: Product[] = [
     price: 35000,
     priceFormatted: "₦35,000",
     category: "kaftans",
-    image: "/placeholder.svg",
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    image: embroideredGoldKaftan,
+    images: [embroideredGoldKaftan, embroideredGoldKaftan, embroideredGoldKaftan],
     description: "Luxury kaftan with intricate gold embroidery. A statement piece designed for special occasions, featuring meticulous hand-embroidered gold thread work on premium fabric.",
     details: [
       "Luxury cotton-silk blend",
@@ -76,8 +83,8 @@ export const products: Product[] = [
     price: 15000,
     priceFormatted: "₦15,000",
     category: "shirts",
-    image: "/placeholder.svg",
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    image: casualLinenShirt,
+    images: [casualLinenShirt, casualLinenShirt, casualLinenShirt],
     description: "Breathable linen shirt for everyday comfort. Perfect for warm weather, this shirt combines natural linen's cooling properties with a refined casual look.",
     details: [
       "100% natural linen",
@@ -95,8 +102,8 @@ export const products: Product[] = [
     price: 28000,
     priceFormatted: "₦28,000",
     category: "kaftans",
-    image: "/placeholder.svg",
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    image: royalBlueKaftan,
+    images: [royalBlueKaftan, royalBlueKaftan, royalBlueKaftan],
     description: "Regal blue kaftan with contemporary styling. This bold piece makes a statement with its rich royal blue tone and modern cut that flatters every body type.",
     details: [
       "Premium dyed cotton",
@@ -114,8 +121,8 @@ export const products: Product[] = [
     price: 20000,
     priceFormatted: "₦20,000",
     category: "shirts",
-    image: "/placeholder.svg",
-    images: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    image: oxfordBusinessShirt,
+    images: [oxfordBusinessShirt, oxfordBusinessShirt, oxfordBusinessShirt],
     description: "Professional shirt with premium Oxford fabric. The quintessential business shirt, designed with a crisp finish and structured collar for a polished professional look.",
     details: [
       "Premium Oxford cotton",
