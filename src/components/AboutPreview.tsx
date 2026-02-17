@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Award, Users, Sparkles, Target } from "lucide-react";
 import { Link } from "react-router-dom";
+import aboutCraftsmanship from "@/assets/about-craftsmanship.jpg";
 
 const AboutPreview = () => {
   return (
@@ -86,7 +87,7 @@ const AboutPreview = () => {
             
             <div className="relative overflow-hidden rounded-2xl shadow-xl group-hover:shadow-primary/20 transition-all duration-700">
               <img
-                src="/placeholder.svg"
+                src={aboutCraftsmanship}
                 alt="Brand 45 Craftsmanship"
                 className="w-full h-96 object-cover transform group-hover:scale-105 transition-transform duration-700"
               />
