@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Award, Heart, Users, Zap } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import aboutStory from "@/assets/about-story.jpg";
 
 const About = () => {
   const values = [
@@ -80,7 +81,7 @@ const About = () => {
             <div className="relative animate-fade-in">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg"></div>
               <img
-                src="/placeholder.svg"
+                src={aboutStory}
                 alt="Brand 45 Story"
                 className="relative z-10 w-full h-96 object-cover rounded-lg shadow-lg"
               />
