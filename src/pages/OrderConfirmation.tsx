@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 
-const WHATSAPP_NUMBER = "2347062849981";
+const WHATSAPP_NUMBER = "2349057178590";
 
 const OrderConfirmation = () => {
   const location = useLocation();

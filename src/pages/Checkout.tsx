@@ -16,7 +16,7 @@ const BANK_DETAILS = {
   accountName: "Brand Forty Five Ltd",
 };
 
-const WHATSAPP_NUMBER = "2347062849981";
+const WHATSAPP_NUMBER = "2349057178590";
 
 const Checkout = () => {
   const { items, totalPrice, totalPriceFormatted, clearCart } = useCart();
