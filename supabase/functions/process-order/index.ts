@@ -146,6 +146,7 @@ Deno.serve(async (req) => {
       `;
 
       try {
+        // Send confirmation to customer
         const emailRes = await fetch(appsScriptUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -160,6 +161,37 @@ Deno.serve(async (req) => {
           const errBody = await emailRes.text();
           console.error("Apps Script error:", errBody);
         }
+
+        // Send alert to store owner
+        const ownerAlertHtml = `
+          <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px">
+            <h1 style="color:#1a1a2e;text-align:center">🛒 New Order Received!</h1>
+            <div style="background:#f8f9fa;padding:20px;border-radius:8px;margin:20px 0">
+              <h3>Order #${orderId}</h3>
+              <p><strong>Customer:</strong> ${order.customerName}</p>
+              <p><strong>Email:</strong> ${order.customerEmail}</p>
+              <p><strong>Phone:</strong> ${order.customerPhone}</p>
+              <p><strong>Address:</strong> ${order.customerAddress}</p>
+            </div>
+            <div style="background:#f8f9fa;padding:20px;border-radius:8px;margin:20px 0">
+              <h3>Items Ordered</h3>
+              ${order.items.map((i: any) => `<p>${i.name} (Size: ${i.size}) x${i.quantity} — ${i.priceFormatted}</p>`).join("")}
+              <hr><p style="font-size:18px"><strong>Total: ${order.totalPriceFormatted}</strong></p>
+            </div>
+            ${invoiceUrl ? `<p><a href="${invoiceUrl}" style="display:inline-block;padding:12px 24px;background:#1a1a2e;color:white;text-decoration:none;border-radius:8px">View Invoice</a></p>` : ""}
+          </div>
+        `;
+
+        await fetch(appsScriptUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            to: "brandfortyfive45@gmail.com",
+            subject: `🛒 New Order #${orderId} — ${order.customerName} — ${order.totalPriceFormatted}`,
+            html: ownerAlertHtml,
+          }),
+        }).catch(e => console.error("Owner alert email failed:", e));
+
       } catch (e) {
         console.error("Email send failed:", e);
       }
