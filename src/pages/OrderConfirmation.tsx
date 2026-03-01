@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useLocation, Link, Navigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, MessageCircle, Upload, FileText, Loader2 } from "lucide-react";
+import { CheckCircle, MessageCircle, Upload, FileText, Loader2, Instagram, Copy } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
@@ -103,6 +103,16 @@ const OrderConfirmation = () => {
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
   };
 
+  const buildOrderText = () => {
+    const hasReceipt = !!receiptUrl;
+    const hasInvoice = !!state.invoiceUrl;
+    const lines = [`Hi! Order #${state.orderId}`];
+    if (hasReceipt) lines.push(`📎 Receipt: ${receiptUrl}`);
+    if (hasInvoice) lines.push(`📄 Invoice: ${state.invoiceUrl}`);
+    lines.push("", "Please confirm my order. Thank you!");
+    return lines.join("\n");
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -198,12 +208,24 @@ const OrderConfirmation = () => {
           )}
 
           {/* Actions */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white w-full sm:w-auto" onClick={() => window.open(buildWhatsAppLink(), '_blank', 'noopener,noreferrer')}>
                 <MessageCircle className="w-5 h-5 mr-2" />
                 {receiptUrl ? "Send Receipt & Invoice via WhatsApp" : "Send Invoice via WhatsApp"}
               </Button>
-            <Link to="/shop">
+              <Button size="lg" className="bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 text-white w-full sm:w-auto" onClick={() => {
+                const lines = buildOrderText();
+                navigator.clipboard.writeText(lines).then(() => {
+                  toast({ title: "Order details copied!", description: "Now paste it in the Instagram DM." });
+                  window.open("https://ig.me/m/brand_fortyfive", "_blank", "noopener,noreferrer");
+                });
+              }}>
+                <Instagram className="w-5 h-5 mr-2" />
+                Send via Instagram DM
+              </Button>
+            </div>
+            <Link to="/shop" className="w-full sm:w-auto mx-auto">
               <Button size="lg" variant="outline" className="w-full sm:w-auto">
                 Continue Shopping
               </Button>
