@@ -12,8 +12,8 @@ import { toast } from "@/hooks/use-toast";
 
 const BANK_DETAILS = {
   bankName: "First Bank of Nigeria",
-  accountNumber: "0123456789",
-  accountName: "Brand Forty Five Ltd",
+  accountNumber: "2046401728",
+  accountName: "BRAND 45",
 };
 
 const WHATSAPP_NUMBER = "2349057178590";
