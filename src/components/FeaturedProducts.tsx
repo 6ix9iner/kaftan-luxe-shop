@@ -4,34 +4,23 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Eye, ShoppingCart, Star, Sparkles, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { products as shopProducts } from "@/data/products";
+import { useProducts } from "@/hooks/useProducts";
 
 const FeaturedProducts = () => {
   const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
+  const { data: shopProducts = [] } = useProducts();
 
-  const products = [
-    {
-      ...shopProducts[0],
-      price: shopProducts[0].priceFormatted,
-      originalPrice: "₦35,000",
-      rating: 5,
-      badge: "Best Seller"
-    },
-    {
-      ...shopProducts[2],
-      price: shopProducts[2].priceFormatted,
-      originalPrice: "₦45,000",
-      rating: 5,
-      badge: "Exclusive"
-    },
-    {
-      ...shopProducts[4],
-      price: shopProducts[4].priceFormatted,
+  const badges = ["Best Seller", "Exclusive", "New Arrival"];
+  const featuredIndices = [0, 2, 4];
+  const products = featuredIndices
+    .filter((i) => i < shopProducts.length)
+    .map((i, idx) => ({
+      ...shopProducts[i],
+      price: shopProducts[i].priceFormatted,
       originalPrice: null,
       rating: 5,
-      badge: "New Arrival"
-    }
-  ];
+      badge: badges[idx] || "",
+    }));
 
   return (
     <section className="min-h-screen py-16 bg-gradient-to-br from-muted/10 via-background to-muted/15 relative overflow-hidden flex items-center">

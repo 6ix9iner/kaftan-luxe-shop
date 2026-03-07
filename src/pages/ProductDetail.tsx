@@ -4,13 +4,13 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Minus, Plus, ShoppingBag, Heart } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { getProductBySlug, products } from "@/data/products";
+import { useProducts, useProductBySlug } from "@/hooks/useProducts";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "@/hooks/use-toast";
 
 const ProductDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const product = getProductBySlug(slug || "");
+  const { data: product, isLoading } = useProductBySlug(slug || "");
   const { addToCart } = useCart();
   const [selectedSize, setSelectedSize] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -40,7 +40,8 @@ const ProductDetail = () => {
     toast({ title: `${product.name} added to cart`, description: `Size: ${selectedSize} | Qty: ${quantity}` });
   };
 
-  const related = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 3);
+  const { data: allProducts = [] } = useProducts();
+  const related = allProducts.filter(p => p.category === product.category && p.id !== product.id).slice(0, 3);
 
   return (
     <div className="min-h-screen bg-background">
