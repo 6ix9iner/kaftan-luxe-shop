@@ -7,9 +7,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Heart, Eye, Filter } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { products } from "@/data/products";
+import { useProducts } from "@/hooks/useProducts";
 
 const Shop = () => {
+  const { data: products = [], isLoading } = useProducts();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedSort, setSelectedSort] = useState("latest");
 
